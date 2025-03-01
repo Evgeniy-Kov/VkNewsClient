@@ -21,12 +21,13 @@ fun NavGraphBuilder.homeScreenNavGraph(
         composable(
             route = Screen.Comments.route,
             arguments = listOf(
-                navArgument(Screen.KEY_FEED_POST_ID) {
+                navArgument(Screen.KEY_FEED_POST) {
                     type = FeedPost.NavigationType
                 }
             )
         ) {
-            val feedPost = it.arguments?.getParcelable<FeedPost>(Screen.KEY_FEED_POST_ID) ?: throw RuntimeException("Args is null")
+            val feedPost = it.arguments?.getParcelable<FeedPost>(Screen.KEY_FEED_POST)
+                ?: throw RuntimeException("Args is null")
             commentScreenContent(feedPost)
         }
     }
