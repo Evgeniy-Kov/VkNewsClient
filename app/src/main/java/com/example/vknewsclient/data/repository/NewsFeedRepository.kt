@@ -12,10 +12,12 @@ import com.vk.api.sdk.VKPreferencesKeyValueStorage
 import com.vk.api.sdk.auth.VKAccessToken
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.retry
 import kotlinx.coroutines.flow.stateIn
 
 class NewsFeedRepository(application: Application) {
@@ -46,6 +48,9 @@ class NewsFeedRepository(application: Application) {
             _feedPosts.addAll(posts)
             emit(feedPosts)
         }
+    }.retry {
+        delay(RETRY_TIMEOUT_MILLIS)
+        true
     }
 
     private val apiService = ApiFactory.apiService
@@ -115,5 +120,9 @@ class NewsFeedRepository(application: Application) {
         val postIndex = feedPosts.indexOf(feedPost)
         _feedPosts[postIndex] = newPost
         refreshedListFlow.emit(feedPosts)
+    }
+
+    private companion object {
+        const val RETRY_TIMEOUT_MILLIS = 3000L
     }
 }
