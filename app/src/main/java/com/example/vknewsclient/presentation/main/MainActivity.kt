@@ -7,7 +7,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.runtime.collectAsState
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.vknewsclient.domain.AuthState
+import com.example.vknewsclient.domain.entity.AuthState
 import com.example.vknewsclient.ui.theme.VkNewsClientTheme
 import com.vk.api.sdk.VK
 import com.vk.api.sdk.auth.VKAuthenticationResult
