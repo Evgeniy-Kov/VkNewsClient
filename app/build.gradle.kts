@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     id("kotlin-parcelize")
+    id("kotlin-kapt")
 }
 
 android {
@@ -56,6 +57,8 @@ dependencies {
     implementation (libs.android.sdk.core)
     implementation (libs.android.sdk.api)
     implementation(libs.converter.gson)
+    implementation(libs.dagger)
+    kapt(libs.dagger.compiler)
     implementation(libs.logging.interceptor)
     implementation(libs.coil.compose)
 //    implementation(libs.androidx.material2)
